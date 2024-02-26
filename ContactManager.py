@@ -40,6 +40,25 @@ class ContactManager(Contact):
                 return True
         return False
 
+    def search_contact(self, query):
+        found_contacts = []
+        for contact in self.contacts:
+            if query.lower() in contact['name'].lower():
+                found_contacts.append(contact)
+        return found_contacts
+
+    def edit_contact(self, name, surname, new_phone, new_email):
+        for contact in self.contacts:
+            print(contact['name'], contact['surname'])
+            if contact['name'] == name and contact['surname'] == surname:
+                print("contact founded+")
+                contact['phone'] = new_phone
+                contact['email'] = new_email
+                self.save_contacts()
+                return True
+            else:
+                return False
+
     def display_contacts(self):
         if self.contacts:
             print("Contacts:")
